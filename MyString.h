@@ -30,6 +30,11 @@ public:
     CMyString operator+( const CMyString &rhs);
     CMyString& operator+=( const CMyString &rhs);
 
+    //관계 연산자
+    int operator==(const CMyString &rhs);
+    int operator!=(const CMyString &rhs);
+
+
     //베열 연산자
     char& operator[](int nIndex);
 
@@ -44,6 +49,7 @@ public:
     // 잘못된 데이터 삭제(delete) 명시
     int SetString(char* pszParam) = delete;
     int SetString( const char* pszParam) ;
+    virtual void OnSetString( char* pszData, int nLength);
     const char* GetString(void) const;
     int GetLength() const ;
     void Release(void) ;

@@ -3,7 +3,7 @@
 //
 #include "stdafx.h"
 #include "MyString.h"
-
+#include "MyStringEx.h"
 
 // 디폴트 생성자
 CMyString::CMyString() :m_pszData(nullptr), m_nLength(0){
@@ -70,6 +70,7 @@ char CMyString::operator[](int nIndex) const {
 }
 // 형 변환 연산자
 CMyString::operator char*(void) const {
+    cout << "operator char*" << endl;
     return m_pszData;
 }
 
@@ -93,11 +94,13 @@ int CMyString::SetString(const char *pszParam)  {
     memcpy(m_pszData, pszParam, nLength);
     m_nLength = nLength;
 
+    OnSetString(m_pszData, nLength);
+
     return nLength;
 }
 
 // 상수형 메소드, 읽을수는 있지만 쓸수는 없다
-const char *CMyString::GetString() const{
+const char *CMyString::GetString() const {
     return this->m_pszData;
 }
 
@@ -139,6 +142,28 @@ void CMyString::Release()  {
         this->m_pszData = nullptr; //delete는 NULL로 초기화하지 않는다.
         this->m_nLength = 0;
     }
+}
+
+int CMyString::operator==(const CMyString &rhs) {
+    if ( m_pszData != NULL && rhs.m_pszData != NULL ) {
+        if ( strcmp(m_pszData, rhs.m_pszData) == 0 ) {
+            return 1;
+        }
+    }
+
+    return 0;
+}
+
+int CMyString::operator!=(const CMyString &rhs) {
+    if ( m_pszData != NULL && rhs.m_pszData ) {
+        if ( !strcmp(m_pszData, rhs.m_pszData ) ) {
+            return 1;
+        }
+    }
+    return 0;
+}
+
+void CMyString::OnSetString(char *pszData, int nLength) {
 }
 
 
@@ -188,5 +213,9 @@ int main(int argc, char** argv)
     CMyString strParam("HelloWorld");
     cout << strParam << endl;
     TestFunc(strParam);
+
+    CMyStringEx strTest2;
+    strTest2.SetString("멍멍이아들");
+    cout << strTest2 << endl;
 
 }

@@ -4,7 +4,7 @@ project(MyString)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_C_FLAGS "-fexec-charset=UTF-8")
 
-add_executable(MyString MyString.cpp MyString.h stdafx.h)
+add_executable(MyString MyString.cpp MyString.h stdafx.h MyStringEx.cpp MyStringEx.h)
 
 
 project(study)
