@@ -166,6 +166,12 @@ int CMyString::operator!=(const CMyString &rhs) {
 void CMyString::OnSetString(char *pszData, int nLength) {
 }
 
+CMyString operator+(const char *pszParam, const CMyString &strParam) {
+    CMyString strResult(pszParam);
+    strResult.Append(strParam.m_pszData);
+    return strResult;
+}
+
 
 void TestFunc(const CMyString &strParam){
     string temp = strParam.GetString();
@@ -217,5 +223,9 @@ int main(int argc, char** argv)
     CMyStringEx strTest2;
     strTest2.SetString("멍멍이아들");
     cout << strTest2 << endl;
+
+    CMyString First("World"), c;
+    c = "Hello" + First; // c.operator+("Hello" + CMyString);
+    cout << c << endl;
 
 }

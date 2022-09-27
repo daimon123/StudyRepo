@@ -34,6 +34,7 @@ public:
     int operator==(const CMyString &rhs);
     int operator!=(const CMyString &rhs);
 
+    friend CMyString operator+(const char *pszParam, const CMyString &strParam);
 
     //베열 연산자
     char& operator[](int nIndex);
